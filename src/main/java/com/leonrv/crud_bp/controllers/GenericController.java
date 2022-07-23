@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.*;
 import com.leonrv.crud_bp.repositories.*;
 import com.leonrv.crud_bp.services.*;
 
-public abstract class GenericController<T> {
+public abstract class GenericController<T, TID> {
 
     // @Autowired(required = false)
-    GenericService<T> service;
+    GenericService<T, TID> service;
 
-    public GenericController(IGenericRepository<T> repository){
-        this.service = new GenericService<T>(repository) {};
+    public GenericController(IGenericRepository<T, TID> repository){
+        this.service = new GenericService<T,TID>(repository) {};
     }
 
     // @GetMapping("")
@@ -30,7 +30,7 @@ public abstract class GenericController<T> {
     // }
 
     @GetMapping("/{id}")
-    public ResponseEntity<T> getById(@PathVariable Long id){
+    public ResponseEntity<T> getById(@PathVariable TID id){
         return ResponseEntity.ok(service.getById(id));
     }
 
@@ -45,7 +45,7 @@ public abstract class GenericController<T> {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id){
+    public ResponseEntity<String> delete(@PathVariable TID id){
         service.delete(id);
         return ResponseEntity.ok("Ok");
     }

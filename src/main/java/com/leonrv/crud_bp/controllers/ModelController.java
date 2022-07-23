@@ -5,8 +5,8 @@ import com.leonrv.crud_bp.models.*;
 import com.leonrv.crud_bp.repositories.*;
 
 @RestController @RequestMapping("/api/model") @CrossOrigin("*")
-public class ModelController extends GenericController<Model> {
-    public ModelController(IGenericRepository<Model> repository) {
+public class ModelController extends GenericController<Model, Long> {
+    public ModelController(IGenericRepository<Model, Long> repository) {
         super(repository);
     }
 }
